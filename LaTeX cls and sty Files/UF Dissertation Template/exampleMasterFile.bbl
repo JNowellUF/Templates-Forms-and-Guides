@@ -1,0 +1,18 @@
+\providecommand{\bysame}{\leavevmode\hbox to3em{\hrulefill}\thinspace}
+\providecommand{\MR}{\relax\ifhmode\unskip\space\fi MR }
+% \MRhref is called by the amsart/book/proc definition of \MR.
+\providecommand{\MRhref}[2]{%
+  \href{http://www.ams.org/mathscinet-getitem?mr=#1}{#2}
+}
+\providecommand{\href}[2]{#2}
+\begin{thebibliography}{1}
+
+\bibitem{ConwayCSV1}
+J.B. Conway, \emph{Functions of {O}ne {C}omplex {V}ariable {I}}, Functions of
+  one complex variable / John B. Conway, Springer, 1978.
+
+\bibitem{Rudin-UnitBallCN}
+Walter Rudin, \emph{Function theory in the unit ball of $\mathbb{C}^n$},
+  Springer-Verlag New York, 1980 (English).
+
+\end{thebibliography}

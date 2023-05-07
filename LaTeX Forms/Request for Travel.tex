@@ -1,0 +1,343 @@
+\documentclass[•]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{fp}
+\pagenumbering{gobble}
+\newif\ifAutomate
+\Automatefalse
+
+
+\setlength{\parskip}{5pt}
+\title{\textbf{REQUEST FOR TRAVEL AUTHORIZATION}}
+
+\newcommand{\mileageReimburse}{% What is the reimbursement rate for private car mileage?
+0.445
+}
+
+\newcommand{\signature}{% The printed version of the signature at the bottom for the dept.
+Douglas Cenzer, Chairman
+}
+% Dummy commands that will be (re)defined if the user uses the automated portion of the compile.
+\newcommand{\expenseTotal}{}
+\newcommand{\mileage}{}
+\newcommand{\mealTotal}{}
+\newcommand{\expenseAirfare}{}
+\newcommand{\expenseMealsCalc}{}
+\newcommand{\expenseRegistration}{}
+\newcommand{\expenseLodging}{}
+\newcommand{\expenseCar}{}
+\newcommand{\expenseIncidental}{}
+\newcommand{\expenseTaxi}{}
+\newcommand{\expenseOtherOne}{}
+\newcommand{\expenseOtherTwo}{}
+\newcommand{\expenseOtherThree}{}
+\newcommand{\fundingMath}{}
+\newcommand{\fundingGrant}{}
+\newcommand{\fundingProject}{}
+\newcommand{\fundingCLAS}{}
+\newcommand{\fundingOther}{}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%		User Configuration Input		%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%	All the info below should be filled out until you see the end tag. It will 
+%	auto populate the table and content in the pdf output based on this info.
+
+%% IMPORTANT!! If you wish to use the Automate feature and allow LaTeX to determine your costs and things automatically, then you must make sure the following \Automatetrue command is not commented. If you don't wish it to do so, then make sure it is commented.
+%\Automatetrue
+
+\newcommand{\travelor}{% Travelor's Name (First and Last)
+    \hfill% Replace this entire line with your actual name to populate automatically.
+}
+
+\newcommand{\UFID}{% Travelor's UFID
+    \hfill \hspace*{1pt}% Replace this entire line with your UFID to populate automatically.
+}
+
+\newcommand{\travelLoc}{
+% (Include the Name each City & State or City & Country that you will be traveling to on UF business.) 
+Atlanta Georgia% Replace this entire line with your destination info.
+}
+
+\newcommand{\leaveTime}{% Date and year you are leaving on.
+    \hfill % NOTE: Replace this line with your actual date you are leaving to autopopulate
+}
+
+\newcommand{\returnTime}{% Date you are returning on.
+    \hfill \hspace*{1pt}% NOTE: Replace this entire line with the specific date you are returning to autopopulate
+}
+
+\newcommand{\missTeaching}{% Are you going to miss some teaching duties? Yes or No.
+No % NOTE: Replace this entire line to autopopulate
+}
+
+\newcommand{\missTeachingArrangements}{% If you are missing teaching duties, what arrangements have you made.
+None % NOTE: Replace this entire line to autopopulate
+}
+
+\newcommand{\purpose}{% What is the purpose for you to travel (where/why).
+Attend and participate in the SouthEastern Analysis Meeting.% NOTE: Replace this entire line to autopopulate
+}
+
+\newcommand{\benefit}{% What benefit does this trip serve the state, and if you are using grant money, what benefit (or relevance) is this to the Grant.
+Discuss and disseminate recent results in operator theory % NOTE: Replace this entire line to autopopulate
+}
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%       Automated Calculation Input        %%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% If you are planning to use hte Automate feature, you must fill in everything below with the correct numbers. Otherwise you may get some.... weird results.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%		Funding		 %%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%% Note: You can auto calculate the numbers by populating the below values and un-commenting the 
+
+\ifAutomate
+\newcommand{\fundingMath}{% How much funding are you requesting from the math department?
+0
+}
+
+\newcommand{\fundingGrant}{% How much funding are you getting from a Grant?
+0
+}
+
+\newcommand{\fundingProject}{% What is the Project # for the grant?
+/A
+}
+
+\newcommand{\fundingCLAS}{% How much funding are you requesting from CLAS?
+0
+}
+
+\newcommand{\fundingOther}{% What funding are you getting from other sources?
+0
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%		Expenses	 %%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+\newcommand{\expenseAirfare}{% How much did you spend on Airfare? Only put numbers here
+0
+}
+
+\newcommand{\expenseRegistration}{% How much did you spend on Registration. Only put numbers here
+40
+}
+
+\newcommand{\expenseLodging}{% How much was the cost of your Lodging. Only put numbers here
+300
+}
+
+\newcommand{\expenseCar}{% How much is the cost of your Rental Car. Only National or Enterprise Rentals count. Only put numbers here
+0
+}
+
+\newcommand{\expenseMileage}{% The number of miles you drive of your own car (reimbursement is calculated automatically). Only put numbers here
+0
+}
+
+\newcommand{\expenseIncidental}{% The $ cost of your Incidental expenses. Only put numbers here
+0
+}
+
+\newcommand{\expenseTaxi}{% How much did you spend on taxi/shuttle/ubr etc. Only put numbers here
+50
+}
+
+\newcommand{\expenseOtherOne}{% Generic "Other" Expense 1. Only put numbers here
+0
+}
+
+\newcommand{\expenseOtherTwo}{% Generic "Other" Expense 2. Only put numbers here
+0
+}
+
+\newcommand{\expenseOtherThree}{% Generic "Other" Expense 3. Only put numbers here
+0
+}
+
+
+\newcommand{\expenseMeals}{% The $ cost of your Meals. Use this if you know the total value with the following information: (B-6, L-11, D-19=\$36 per day) Per Diem in lieu of lodging and meals. 
+% Alternatively use \expenseMealsCalc to calculate your meal numbers. Only put numbers here
+0
+}
+
+
+%%%%%%	Meal Expenses Calculator below. Fill out the time you left, time you return, and full days you are gone for.
+%%%%%%		Alternatively you can simply input the meal value above directly. Remember to Reset whichever one you 
+%%%%%%		aren't using back to zero!
+
+\newcommand{\expenseMealsCalc}{% The $ cost of your Meals. Use this if you know the total value with the following information: (B-6, L-11, D-19=\$36 per day) Per Diem in lieu of lodging and meals. 
+% Alternatively use \expenseMealsCalc to calculate your meal numbers. Only put numbers here
+
+\newcommand{\daysGone}{% Put the total number of days you will be gone here. Do not count the day you leave or the day you return. For example if you leave on a Saturday and return on Sunday (the next day), put 0 here.
+2
+}
+\newcommand{\hourLeave}{% Put the hour you leave here in military time. Thus if you leave at 6am, put 6. If you leave at 3pm put 15. Use decimals and not time notation, so 9:30am is 9.5.
+12
+}
+\newcommand{\hourReturn}{% Put the hour you will get home here in military time. Thus if you return at 9am, put 9. If you return at 11pm, put 23.
+18
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%		User Configuration End			%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+
+%%% Using a total hack since the fp package lacks rounding up/down options.
+\FPeval\hrL{clip(trunc((\hourLeave - 0.0000001):0) + 1)}
+\FPeval\hrR{clip(trunc((\hourReturn + 0.0000001):0) - 1)}
+
+
+
+\expandafter\ifnum\hourLeave < 7
+\FPeval\hrLTMP{6}
+\else
+\FPeval\hrLTMP{0}
+\fi
+
+\expandafter\ifnum\hourLeave < 13
+\FPeval\hrLTMP{\hrLTMP + 11}
+\fi
+
+\expandafter\ifnum\hourLeave < 21
+\FPeval\hrLTMP{\hrLTMP + 19}
+\fi
+
+\expandafter\ifnum\hourReturn > 5
+\FPeval\hrRTMP{6}
+\else
+\FPeval\hrRTMP{0}
+\fi
+
+\expandafter\ifnum\hourReturn > 11
+\FPeval\hrRTMP{\hrRTMP + 11}
+\fi
+
+\expandafter\ifnum\hourReturn > 19
+\FPeval\hrRTMP{\hrRTMP + 19}
+\fi
+
+
+\FPeval\mealTotal{round((\hrRTMP + \hrLTMP + 36*\daysGone):2)}
+
+\FPeval\mealTotal{max(\mealTotal,\expenseMeals)}
+
+
+%% Compute the mileage reimbursement based on reported mileage and reimbursement rate.
+\FPeval\mileage{clip(\expenseMileage * \mileageReimburse)}
+
+%% Compute total expenses
+\FPeval\expenseTotal{round((\expenseAirfare + \expenseRegistration + \expenseLodging + \mealTotal + \expenseCar + \mileage + \expenseIncidental + \expenseTaxi + \expenseOtherOne + \expenseOtherTwo + \expenseOtherThree):2)}
+}
+\fi
+\renewcommand{\arraystretch}{1.3}
+
+\begin{document}
+\date{}
+\maketitle
+\vspace{-1.5cm}
+
+\expenseMealsCalc
+
+\textbf{TRAVELER:} \ifAutomate\travelor\else\hfill\fi \textbf{UFID:} \ifAutomate\UFID\else\hfill\hspace*{1pt}\fi
+
+\textbf{DESTINATION:} \ifAutomate\travelLoc\fi \\
+
+\textbf{DATE OF DEPARTURE: }\ifAutomate\leaveTime\else\hfill\fi \textbf{DATE OF RETURN: }\ifAutomate\returnTime\else\hfill\hspace*{1pt}\fi
+
+\textbf{Will you miss any teaching duties?} \ifAutomate\missTeaching\fi
+
+\textbf{If so, what arrangements have you made?} \ifAutomate\missTeachingArrangements\fi
+
+\textbf{What is the purpose of this trip?}  \ifAutomate\purpose\else\vfill\fi
+
+\textbf{What benefits to the state (and grant if applicable) will this trip give?} \ifAutomate\benefit\else\vfill\fi
+
+\hrulefill
+
+\begin{center}
+  \begin{tabular}{ | l | l | }
+\hline
+
+Source & Expense \\ \hline
+
+Airfare & \$ \expenseAirfare \\ \hline
+
+Registration & \$ \expenseRegistration \\ \hline
+
+Lodging & \$ \expenseLodging \\ \hline
+
+Meals & \$ 	\mealTotal % 
+\\ \hline
+
+Car Rental & \$ \expenseCar
+\\ \hline
+
+Mileage & \$ \mileage
+\\ \hline
+
+Incidental Expenses & \$ \expenseIncidental \\ \hline
+
+Shuttle/Taxi & \$ \expenseTaxi \\ \hline
+
+Other & \$ \expenseOtherOne \\ \hline
+
+Other & \$ \expenseOtherTwo \\ \hline
+
+Other & \$ \expenseOtherThree \\ \hline
+
+TOTAL & \$ \expenseTotal \\ \hline
+  \end{tabular}
+  \begin{tabular}{| l | l |}
+  \hline
+Funding & Requested Amount\\  \hline
+
+Math: & \$ \fundingMath \\ \hline
+
+Grant: & \$ \fundingGrant  \\ \hline
+
+Project Number: & \fundingProject   \\ \hline
+
+CLAS: & \$ \fundingCLAS   \\ \hline
+
+Other: & \$ \fundingOther  \\ \hline
+
+  \end{tabular}
+\end{center}
+
+Total Expense: 
+%\$ \expenseTotal % NOTE: Uncomment the start of this line to autopopulate expenses. 
+\hfill 
+%\FPeval\fundingTotal{clip(\fundingMath + \fundingGrant + \fundingCLAS + \fundingOther)}\expandafter\ifnum\fundingTotal < 1\fi  %% NOTE: Uncomment this line (which starts with \FPeval\fundingTotal ... ) to autopopulate funding requests.
+%No Funding Requested \hfill \hfill %NOTE: Uncomment if appropriate.
+
+\hrulefill
+
+\vspace{10pt}
+
+TRAVEL APPROVED \hspace{10pt} TRAVEL DISAPPROVED \hspace{10pt} MATH CONTRIBUTION: \$ \underline{\hspace{1.1in}}
+
+\vspace{20pt}
+
+DATE: \underline{\hspace{1in}} \hspace{1in} SIGNED: \underline{\hspace{3.15in}}
+
+\hspace{3.5in} \signature
+
+
+\end{document}
+

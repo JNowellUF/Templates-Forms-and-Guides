@@ -1,0 +1,203 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage[margin=1in]{geometry}
+
+\setlength{\parskip}{5pt}
+\title{SURVEY ON INTEREST IN SUMMER \arabic{currentYear} TEACHING}
+
+%%%% For File Writer (eg Sandy or Margaret) Skip to just before the "Begin Document" line where it says "Manual Configuration". There are configurtaion instructions for you there to have the form filled out automatically.
+%%%% For students: Skip to the "Begin Document" line to fill out form.
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Configuration Magic: Do not touch this unless you know what you are doing!	%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+% Set year of form
+\newcounter{currentYear}
+\setcounter{currentYear}{\the\year}% Change this to change the year from the current year. This should never actually be necessary unless you are building a summer schedule 3+ months earlier than usual.
+
+%%%%% Configuration
+\newcommand{\Config}[9]{% Master magical config command
+%%%% This command takes in all the user config and magically percolates it throughout the document to make everything work. 
+    
+    %%Input Order/effects
+    
+    %   #1 - Summer A Start Date
+    %   #2 - Summer A End Date
+    %   #3 - Summer A Finals Date
+    %   #4 - Summer B Start Date
+    %   #5 - Summer B End Date
+    %   #6 - Summer B Finals Date
+    %   #7 - Summer C Start Date
+    %   #8 - Summer C End Date
+    %   #9 - Summer C Finals Date
+    
+    %Summer A Terms
+    \newcommand{\SumAS}{% Holds Data for Start of Summer A
+    #1
+    }
+    \newcommand{\SumAE}{% Holds Data for End of Summer A
+    #2
+    }
+    \newcommand{\SumAFin}{% Holds Data for End of Summer A Finals
+    #3
+    }
+    \newcommand{\SumBS}{% Holds Data for Start of Summer B
+    #4
+    }
+    \newcommand{\SumBE}{% Holds Data for End of Summer B
+    #5
+    }
+    \newcommand{\SumBFin}{% Holds Data for End of Summer B Finals
+    #6
+    }
+    \newcommand{\SumCS}{% Holds Data for Start of Summer C
+    #7
+    }
+    \newcommand{\SumCE}{% Holds Data for End of Summer C
+    #8
+    }
+    \newcommand{\SumCFin}{% Holds Data for End of Summer C Finals
+    #9
+    }
+}
+
+\newcommand{\due}[2]{
+    \newcommand{\dueDate}{\textbf{#1}\relax}
+    \newcommand{\dueRecipient}{\textbf{#2}\relax}
+}
+
+\newcommand{\choice}[4]{
+% Master student response command
+
+% #1 - Student Name
+% #2 = first choice
+% #3 - second choice
+% #4 - Third choice
+
+    I, \textbf{#1}, would prefer to teaching in Summer #2. If that is not available, I would prefer Summer #3, and then Summer #4. Thus my order of preference is:
+
+    \textbf{#2 $>$ #3 $>$ #4}
+}
+
+\newcommand{\nochoice}[1]{
+    I, \textbf{#1}, \textbf{request no teaching assignment}. I also realize this means I will have no tuition wavier if I decide to enroll in summer courses, and I will also not be receiving a stipend (for teaching duties) during this summer. This does not necessarily impact any scholarships or non-teaching stipends I might otherwise receive.
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%			 End of Configuration Magic				%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+\begin{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%			 Begin Manual Configuration				%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%% Original File Writer (eg Sandy or Margaret) Fill Out the Following:
+\Config
+	{% Date for Summer A: First Day of classes on next line:
+	May 11$^{\text{th}}$
+	}
+	{% Date Summer A: Last Day of classes on next line:
+	June 19$^{\text{st}}$
+	}
+	{% Date Summer A: Last day of Finals on next line:
+	June 19$^{\text{st}}$
+	}
+	{% Date for Summer B: First Day of classes on next line:
+	June 29$^{\text{st}}$
+	}
+	{% Date for Summer B: Last Day of classes on next line:
+	August 7$^{\text{th}}$
+	}
+	{% Date for Summer B: Last Day of Finals on next line:
+	August 72$^{\text{th}}$
+	}
+	{% Date for Summer C: First Day of classes on next line:
+	May 11$^{\text{th}}$
+	}
+	{% Date for Summer C: Last Day of classes on next line:
+	August 7$^{\text{rd}}$
+	}
+	{% Date for Summer C: Last Day of Finals on next line:
+	August 7$^{\text{th}}$
+	}
+
+\due{% Date to return the form by on next line:
+Noon, January 31$^{\text{st}}$
+}{% Recipient of the form on next line:
+Sandra Gagnon
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%			 End Manual Configuration				%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\date{}
+\maketitle
+\vspace{-2cm}
+
+The Summer \arabic{currentYear}  term dates are as follows:
+\vspace{5pt}
+
+%\hrule
+%\vspace{5pt}
+\begin{tabular}{llll}
+\textbf{\Large{Semester}} & \large{Start Date} & \large{End Date} & \large{Last Day of Finals}\\\hline &&&\\
+\textbf{Summer A} & \SumAS & \SumAE & \SumAFin \\[5pt]
+\textbf{Summer B} & \SumBS & \SumBE & \SumBFin \\[5pt]
+\textbf{Summer C} & \SumCS & \SumCE & \SumCFin \\
+
+\end{tabular}
+
+\vspace{15pt}
+
+\large{\underline{\textbf{How the Tuition waiver processing for summer works:}}}
+
+Students must be registered for classes during the semester in which they are teaching. If you are appointed summer A, you must be registered for 3 credit hours during summer A. If you are appointed summer B, you must be registered for 3 credit hours during summer B. If you are appointed summer C, you must be registered for 6 credit hours. These 6 hours may be spread out between summer A and B, summer A and C, summer B and C, or summer C.
+
+\vspace{10pt}
+
+\textbf{\large{Quick Reference:}} How many credits you have to take (and when) while teaching over the summer
+
+\vspace{10pt}
+
+\begin{tabular}{lcc}
+\textbf{Term(s) You are Teaching} & \textbf{\# Credits } & \textbf{When you must be enrolled} \\\hline &&\\
+Summer A & 3 & Summer A\\
+Summer B & 3 & Summer B\\
+1+ in each A and B & 3 each (6 total) & Summer A and B\\
+Summer C & 6 & Spread across any summer semester(s).\\
+\end{tabular}
+
+Please rank your interest (and desired semester) in teaching and email your request to \dueRecipient by \dueDate.
+
+\textit{\underline{\textbf{PLEASE NOTE:}} Due to budgetary constraints we might not be able to honor your 1st or
+2nd choice regarding summer teaching.}
+
+\large{ \textbf{\underline{Student Response:}}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%			 	Student Response 					%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%Instructions: Just use the \choice command with your name, then your first, second, and third choice for teaching semester. For example, if your name is John Doe and you prefer Summer C, then A, then B, use the command:
+%   \choice{John Doe}{C}{A}{B}
+%  That's it.
+% If, instead, you wish to request NO teaching assignment, use the command \nochoice instead with your name, thus it would be:
+%   \nochoice{John Doe}.
+
+\choice{Jason Nowell}{C}{A}{B}
+%\nochoice{John Doe}
+
+
+
+\end{document}
+

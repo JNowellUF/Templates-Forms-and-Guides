@@ -1,0 +1,681 @@
+\documentclass{report}
+\makeatletter
+\usepackage[linktoc=all]{hyperref}% Use this to provide intra-pdf hyperlinking and better toc
+\hypersetup{%               %           Setup the coloring of the links. 
+%                           %           Currently the only necessary one is "colorlinks=true" and "linkcolor=blue".
+    colorlinks   = true,    %           Colours links instead of ugly boxes
+    urlcolor     = blue,    %           Colour for external hyperlinks
+    linkcolor    = blue,    %           Colour of internal links
+    citecolor    = blue     %           Colour of citations, could be ``red''
+    }
+
+\usepackage{etoolbox}
+\usepackage{tabularx}
+\usepackage{xcolor}
+\usepackage{amsthm,amssymb,amsmath}
+\usepackage[format=hang,labelsep=period,justification=raggedright,font=singlespacing,singlelinecheck=false]{caption}
+\usepackage{titlesec}%          Use this for the actual header styling
+\usepackage{titletoc}%          Use this to manipulate Table of Contents styling
+\usepackage{float}
+%\RequirePackage[numbers]{natbib}
+
+\usepackage[
+    margin=1in,%            All 4 margins need to be one inch.
+    paperheight=11in,%      We want 11in tall paper.
+    paperwidth=8.5in%       And 8.5in wide paper.
+    ]{geometry}%            Geometry package is the easiest way to deal with margins.
+
+
+\providecommand{\realSingleSpace}{\setstretch{1}}%  They claim they want single-space, but what they actually want is 
+%                                               "as little white space between letters as is visually acceptable".
+
+%%%%%%%%%%%%%%%%
+%%% Margins: %%%
+%%%%%%%%%%%%%%%%
+%%%                         They want 1 inch all around margins, which we do with the geometry package.
+\usepackage[
+    margin=1in,%            All 4 margins need to be one inch.
+    paperheight=11in,%      We want 11in tall paper.
+    paperwidth=8.5in%       And 8.5in wide paper.
+    ]{geometry}%            Geometry package is the easiest way to deal with margins.
+
+%% End Margin Config.
+
+%%%%%%%%%%%%%%%%%%%%%
+%%% Font Options: %%%
+%%%%%%%%%%%%%%%%%%%%%
+\raggedright%               They want a ragged right edge.
+%% End Font Setting
+
+%%%%%%%%%%%%%%%%%%%%%%
+%%% Page Numbering %%%
+%%%%%%%%%%%%%%%%%%%%%%
+%%%                         They want the page number in arabic numerals in the bottom middle of each page.
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\renewcommand\headrulewidth{0pt}
+\lhead{}\chead{}\rhead{}
+\cfoot{\thepage}
+\setlength{\footskip}{0.5in}%   They want the page number to be half an inch from the bottom. 
+%                               This measurement is actually the distance to the text block; 
+%                               So 1in margin - 0.5inch from botton = 0.5in footskip value.
+%% End page numbering settings
+
+%%%%%%%%%%%%%%%%%%%%
+%%% Font Spacing %%%
+%%%%%%%%%%%%%%%%%%%%
+
+\usepackage[nodisplayskipstretch]{setspace}%    This will allow us to set spacing in general.
+%                                                   The optional argument "nodisplayskipstretch" turns off doublespacing 
+%                                                       for math display mode environments.
+\usepackage{indentfirst}%                       This will make sure the first paragraph of every chapter is indented.
+\doublespacing%                                     Make everything double spaced by default.
+\preto\longtable{\par\realSingleSpace}%             Pre-append using longtables to make sure that tables are single spaced.
+\preto\itemize{\par\realSingleSpace}%               Pre-append singlespace to itemize to account for 
+%                                                       single space bullet point lists.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%    Formating Design    %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%
+%%% Caption Configuration TBD
+
+\newcounter{figCount}%      This is an internal counter to track how many figures
+\setcounter{figCount}{1}%   We will start at 1 due to how stepping it works.
+
+\newcommand{\addFigure}[3][\Alph{figCount}]{%   Command to manually add a figure
+    \parbox{#2\textwidth}{\centering #1 \\ \includegraphics[width=#2\textwidth]{#3}}
+    \stepcounter{figCount}
+    }
+
+\newenvironment{multiFigure}% Environment that mimicks figure type environment,
+%                               Except it doesn't float around and it resets figCount.
+    {% Begin Environment Code
+        \setcounter{figCount}{1}
+        \minipage\textwidth
+    }
+    {% End Environment Code
+        \endminipage
+    }
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Theorem environment definitions %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newtheorem{theorem}{Theorem}[chapter]
+    \renewcommand{\thetheorem}{\thechapter-\arabic{theorem}}
+\newtheorem{claim}{Claim}[chapter]
+    \renewcommand{\theclaim}{\thechapter-\arabic{claim}}
+\newtheorem{lemma}{Lemma}[chapter]
+    \renewcommand{\thelemma}{\thechapter-\arabic{lemma}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Table Formatting %%%
+%%%%%%%%%%%%%%%%%%%%%%%%
+%%% They want tables configured a certain way that makes the package "longtables" a more desirable option.
+%   More specifically, from their website on text-flow:
+%        Text must be continuous throughout the chapter. 
+%        It is best to place all tables and figures at the end of the appropriate chapter. 
+%        Avoid inserting them into the text of the chapter, unless you are able to do so 
+%        without leaving blank gaps at the bottom of text pages.
+%%%%%%%
+\RequirePackage{longtable}
+\RequirePackage{flafter}% This package stops tables from floating backward up the text. This stops weirdness like tables appearing before the section they are in within the source.
+
+%% End table configure
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Header Formatting %%%
+%%%%%%%%%%%%%%%%%%%%%%%%
+%%  Some headers by default have a huge margin between the top of the chapter text and the top margin, 
+%       which the grad school doesn't like. So we use the titlesec package and the \titleformat command to 
+%       directly access all aspects of chapters and parts to fix spacing, formating, and style.
+\titlelabel{\thetitle . \quad}
+
+\newif\ifdocBody
+\docBodyfalse% Initially we aren't in the body yet.
+%% Define chapter's style based on if we want chapters to auto-upper-case or not.
+
+\titleformat{\chapter}[hang]
+    {\uppercase}
+    {}
+    {0pt}
+    {\centering\realSingleSpace\ifdocBody CHAPTER \thechapter \\[-5pt] \fi}
+    [\raggedright\doublespacing]
+
+\titleformat{\part}[hang]
+    {}
+    {}
+    {0pt}
+    {\centering\realSingleSpace\MakeUppercase}
+    {\raggedright\doublespacing}
+
+
+\titlespacing{\part}{0pt}{-0.7in}{0.5\baselineskip}
+
+\titlespacing{\chapter}{0pt}{-0.7in}{0.5\baselineskip}
+
+%%% Setup the formating for the actual section, subsection, and subsubsections in the text. We use the titlesec package here as it allows us to directly access the formating without having to renew the command and deal with all the code happening in the background for things like "table of contents" and pagebreaking.
+%\titleformat*{\section}{\bfseries\center}% sections need to be bold and centered.
+
+
+\setcounter{secnumdepth}{5}
+\titleformat{\section}%
+    {%
+        \bfseries\center\realSingleSpace%       We want \section to be bold (\bfseries), centered (\center), 
+    }%                                              and single spaced (\realSingleSpace)
+    {%
+        \thesection%                            The section number is held in \thesection
+    }%
+    {1em}%                                      The space between section number and text is the standard 1em
+    {}%
+
+\titleformat{\subsection}%
+    {\bfseries\raggedright\realSingleSpace}%
+    {\thesubsection}%
+    {1em}{}%
+\titleformat{\subsubsection}
+    {
+        \bfseries\filright\realSingleSpace%     We want \subsubsection to be bold (\bfseries), left-justified (\filright), 
+    }%                                              and single spaced (\realSingleSpace)
+    {
+        \thesubsubsection%                      The section number is held in \thesubsubsection
+    }
+    {1em}%                                      The space between section number and text is the standard 1em
+    {}
+
+\titlespacing{\section}{0pt}{0pt}{0pt}
+\titlespacing{\subsection}{0pt}{10pt}{0pt}
+\titlespacing{\subsubsection}{0pt}{10pt}{0pt}
+%% End of Header formating
+
+
+
+%%%%%%%
+%%% Table of Contents, List of Figures, and List of Tables fixes: They wanted hyperlinked dotted lines between the chapter name and the page number. They also want all uppercase "TABLE OF CONTENTS".
+%%%%%%%
+
+%% Fix the formatting of the various numbers.
+\renewcommand*{\thefigure}{\thechapter-\arabic{figure}}%            Change the dot to a hyphen for list of figures.
+\renewcommand*{\theequation}{\thechapter-\arabic{equation}}%        Change the equation to chapter - equation#
+\renewcommand*{\thetable}{\thechapter-\arabic{table}}%              Change the dot to a hyphen for list of tables.
+
+
+
+%%% Fix the titles of the "List Of ...", complete with adding the page/title at the top where applicable.
+\renewcommand*\listfigurename{LIST OF FIGURES
+    
+    \underline{\smash{Figure}} \hfill \underline{\smash{page}}
+    
+    \vspace*{-0.7\baselineskip}
+    }%
+
+\renewcommand*\listtablename{LIST OF TABLES
+    
+    \underline{\smash{Tables}} \hfill \underline{\smash{page}}
+    
+    \vspace*{-0.7\baselineskip}
+    }%
+
+\renewcommand{\contentsname}{TABLE OF CONTENTS
+    
+    \hspace*{0pt}\hfill \underline{\smash{page}}
+    
+    \vspace*{-0.7\baselineskip}
+    }%
+
+\titlecontents{figure}[2em]
+    {}
+    {\hspace*{-2em}\hyper@linkstart{link}{\Hy@tocdestname}\hspace*{2em}{\contentslabel{2em}}\hyper@linkend}
+    {}
+    {\hyper@linkstart{link}{\Hy@tocdestname}{\titlerule*[5pt]{.}\thecontentspage}\hyper@linkend \\*\addvspace{8pt}}
+
+\titlecontents{table}[2em]
+    {}
+    {\hspace*{-2em}\hyper@linkstart{link}{\Hy@tocdestname}\hspace*{2em}{\contentslabel{2em}}\hyper@linkend}
+    {}
+    {\hyper@linkstart{link}{\Hy@tocdestname}{\titlerule*[5pt]{.}\thecontentspage}\hyper@linkend \\*\addvspace{8pt}}
+    
+%%%% An attempt to do everything with titlesec and titletoc packages instead of using toclof package, to avoid package clashes.
+\contentsmargin{0pt}
+
+%%%%%%%
+%%% Below is the formatting for all the Table of Contents hyperlinks, dotted lines, and horizontal alignment.
+
+\titlecontents{part}[0em]
+    {\mdseries}
+    {\hyper@linkstart{link}{\Hy@tocdestname}{\contentslabel{2.3em}}\hyper@linkend}
+    {}
+    {}
+
+\titlecontents{chapter}[0em]
+    {}
+    {\contentslabel{2em}}
+    {}
+    {\hyper@linkstart{link}{\Hy@tocdestname}{\titlerule*[5pt]{.}\thecontentspage}\hyper@linkend \\*\addvspace{8pt}}
+
+\titlecontents{section}[4.1em]
+    {}
+    {\hspace*{-2em}\hyper@linkstart{link}{\Hy@tocdestname}\hspace*{2em}{\contentslabel{2em}}\hyper@linkend}
+    {}
+    {\hyper@linkstart{link}{\Hy@tocdestname}{\titlerule*[5pt]{.}\thecontentspage}\hyper@linkend \\*}
+
+\titlecontents{subsection}[6.4em]
+    {}
+    {\hspace*{-2.3em}\hyper@linkstart{link}{\Hy@tocdestname}\hspace*{2.3em}{\contentslabel{2.3em}}\hyper@linkend}
+    {}
+    {\hyper@linkstart{link}{\Hy@tocdestname}{\titlerule*[5pt]{.}\thecontentspage}\hyper@linkend \\*}
+
+\titlecontents{subsubsection}[9.4em]
+    {}
+    {\hspace*{-3em}\hyper@linkstart{link}{\Hy@tocdestname}\hspace*{3em}{\contentslabel{3em}}\hyper@linkend}
+    {}
+    {\hyper@linkstart{link}{\Hy@tocdestname}{\titlerule*[5pt]{.}\thecontentspage}\hyper@linkend \\*}
+
+%\newenvironment{multiFigure}% Environment that mimicks figure type environment,
+%%                               Except it doesn't float around and it resets figCount.
+%    {% Begin Environment Code
+%        \setcounter{figCount}{1}
+%        \minipage\textwidth
+%    }
+%    {% End Environment Code
+%        \endminipage
+%    }
+
+
+
+\begin{document}
+\tableofcontents
+
+\listoftables
+\listoffigures
+
+\docBodytrue
+\chapter{First chapter}
+
+%\begin{table}[htbp]
+    \captionof{table}{A sample Table using tabularx}\label{first}
+    \begin{tabularx}{6.5in}{XXX}
+      \hline
+      First & Second & Third \\
+      \hline
+      12 & 45 & 26 \\
+      17 & 32 & 93 \\
+      text & 51 & can be there too. \\	
+      \hline
+    \end{tabularx}
+%\end{table}
+ 
+ 
+ 
+\chapter{Second chapter}
+\begin{multiFigure}
+%\addFigure{0.9}{./theworld.png}
+\captionof{figure}{This is a caption for a figure.}
+\end{multiFigure}
+
+
+
+\end{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\newcommand{\newlistentry}[4][\@empty]{%
+
+%%% Error checking can be removed because this is not setup by a user.
+% -------- Delete this section -------- %
+%    \end{macrocode}
+% \begin{macro}{\c@X}
+% \begin{macro}{\theX}
+% Check if \meta{within} and \meta{counter} have been defined. It is
+% an error if \meta{within} has not been defined, and an error if
+% \meta{counter} has been defined. Set the default counter values.
+%    \begin{macrocode}
+  \@ifundefined{c@#2}{%    check & set the counter
+    \ifx \@empty#1\relax
+      \newcounter{#2}
+    \else
+      \@ifundefined{c@#1}{\PackageWarning{tocloft}%
+                          {#1 has no counter for use as a `within'}
+        \newcounter{#2}}%
+      {\newcounter{#2}[#1]%
+       \expandafter\edef\csname the#2\endcsname{%
+         \expandafter\noexpand\csname the#1\endcsname.\noexpand\arabic{#2}}}
+    \fi
+    \setcounter{#2}{0}
+  }
+  {\PackageError{tocloft}{#2 has been previously defined}{\@eha}}
+
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+%
+% That finishes off the error checking. No matter what the result, the
+% rest of the new commands are defined.
+%----------- End Deletion ---------%
+
+
+% \begin{macro}{\l@X}
+% |\l@X{|\meta{title}|}{|\meta{page}|}| typesets the entry.
+%    \begin{macrocode}
+  \@namedef{l@#2}##1##2{%
+%    \end{macrocode}
+% Only typeset if the |\Zdepth| is greater than \meta{level-1}. ----- Can probably delete this section as I have control over depth.
+%    \begin{macrocode}
+    \ifnum \@nameuse{c@#3depth} > #4\relax
+      \vskip \@nameuse{cftbefore#2skip}
+      {\leftskip \@nameuse{cft#2indent}\relax
+       \rightskip \@tocrmarg
+       \parfillskip -\rightskip
+       \parindent \@nameuse{cft#2indent}\relax\@afterindenttrue
+       \interlinepenalty\@M
+       \leavevmode
+       \@tempdima \@nameuse{cft#2numwidth}\relax
+       \expandafter\let\expandafter\@cftbsnum\csname cft#2presnum\endcsname
+       \expandafter\let\expandafter\@cftasnum\csname cft#2aftersnum\endcsname
+       \expandafter\let\expandafter\@cftasnumb\csname cft#2aftersnumb\endcsname
+       \advance\leftskip\@tempdima \null\nobreak\hskip -\leftskip
+       {\@nameuse{cft#2font}##1}\nobreak
+       \@nameuse{cft#2fillnum}{##2}}%
+    \fi
+  }  % end of \l@#2
+
+%    \end{macrocode}
+% \end{macro}
+%
+% Now define all the layout commands used by |\l@X|. The default
+% values of these correspond to those for section entries in
+% non-chaptered documents.                                      ------ Hard part; need to fix the formatting like with the other lists.
+% \begin{macro}{\cftbeforeXskip}
+%    \begin{macrocode}
+  \expandafter\newlength\csname cftbefore#2skip\endcsname
+    \setlength{\@nameuse{cftbefore#2skip}}{\z@ \@plus .2\p@}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\cftXindent}
+% \begin{macro}{\cftXnumwidth}
+%    \begin{macrocode}
+  \expandafter\newlength\csname cft#2indent\endcsname
+  \expandafter\newlength\csname cft#2numwidth\endcsname
+%    \end{macrocode}
+% Set the default values for the indent and numwidth depending on
+% the entry's level. A level of 1 corresponds to a figure entry.
+%    \begin{macrocode}
+  \ifcase #4\relax  % 0
+    \setlength{\@nameuse{cft#2indent}}{0em}
+    \setlength{\@nameuse{cft#2numwidth}}{1.5em}
+  \or               % 1
+    \setlength{\@nameuse{cft#2indent}}{1.5em}
+    \setlength{\@nameuse{cft#2numwidth}}{2.3em}
+  \or               % 2
+    \setlength{\@nameuse{cft#2indent}}{3.8em}
+    \setlength{\@nameuse{cft#2numwidth}}{3.2em}
+  \or               % 3
+    \setlength{\@nameuse{cft#2indent}}{7.0em}
+    \setlength{\@nameuse{cft#2numwidth}}{4.1em}
+  \else             % anything else
+    \setlength{\@nameuse{cft#2indent}}{10.0em}
+    \setlength{\@nameuse{cft#2numwidth}}{5.0em}
+  \fi
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+% \begin{macro}{\cftXfont}
+% \begin{macro}{\cftXpresnum}
+% \begin{macro}{\cftXaftersnum}
+% \begin{macro}{\cftXaftersnumb}
+% \begin{macro}{\cftXdotsep}
+% \begin{macro}{\cftXleader}
+% \begin{macro}{\cftXpagefont}
+% \begin{macro}{\cftXafterpnum}
+% And the remaining commands.
+%    \begin{macrocode}
+  \@namedef{cft#2font}{\normalfont}
+  \@namedef{cft#2presnum}{}
+  \@namedef{cft#2aftersnum}{}
+  \@namedef{cft#2aftersnumb}{}
+  \@namedef{cft#2dotsep}{\cftdotsep}
+  \@namedef{cft#2leader}{\normalfont\cftdotfill{\@nameuse{cft#2dotsep}}}
+  \@namedef{cft#2pagefont}{\normalfont}
+  \@namedef{cft#2afterpnum}{}
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+%
+% \begin{macro}{\toclevel@X}
+% The hyperref package needs a command |\toclevel@X|, holding
+% the \meta{level-1} value.
+%    \begin{macrocode}
+  \@namedef{toclevel@#2}{#4}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\cftXfillnum}
+% Typeset the leader and page number.
+%    \begin{macrocode}
+  \@namedef{cft#2fillnum}##1{%
+    {\@nameuse{cft#2leader}}\nobreak
+    \makebox[\@pnumwidth][\cftpnumalign]{\@nameuse{cft#2pagefont}##1}\@nameuse{cft#2afterpnum}\par
+  }
+%    \end{macrocode}
+% \end{macro}
+% This ends the definition of |\newlistentry|.
+%    \begin{macrocode}
+}
+
+
+
+\newcommand{\newlistof}[4][\@empty]{%
+%    \end{macrocode}
+% Call |\newlistentry| to set up the first level entry.
+%    \begin{macrocode}
+  \ifx \@empty#1\relax
+    \newlistentry{#2}{#3}{0}
+  \else
+    \newlistentry[#1]{#2}{#3}{0}
+  \fi
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\ext@Z}
+% \begin{macro}{\Zdepth}
+% The file extension and listing depth.
+%    \begin{macrocode}
+  \@namedef{ext@#2}{#3}
+  \newcounter{#3depth}
+  \setcounter{#3depth}{1}
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+%
+% \begin{macro}{\cftmarkZ}
+% The heading marks for the listing.
+% \changes{v2.3}{2002/06/15}{different koma settings in \cs{newlistof}}
+%    \begin{macrocode}
+  \if@cftkoma
+    \@namedef{cftmark#3}{%
+      \@mkboth{#4}{#4}}
+  \else
+    \@namedef{cftmark#3}{%
+      \@mkboth{\MakeUppercase{#4}}{\MakeUppercase{#4}}}
+  \fi
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\listofX}
+% Typeset the listing title and entries.
+%    \begin{macrocode}
+ \if@cftnctoc  
+%    \end{macrocode}
+% For the \Lopt{titles} option, basically copy the code from
+% the standard |\tableofcontents| command.                  ----- Can I hijack this to copy list of tables?
+%    \begin{macrocode}
+  \@namedef{listof#2}{%
+    \@cfttocstart
+    \if@cfthaschapter
+      \chapter*{#4}
+    \else
+      \section*{#4}
+    \fi
+    \@nameuse{cftmark#3}
+    \@starttoc{#3}%
+    \@cfttocfinish}
+ \else
+%    \end{macrocode}
+% Otherwise use the fully parameterised definition.
+%    \begin{macrocode}
+  \@namedef{listof#2}{%
+    \@cfttocstart
+    \par
+    \begingroup
+      \parindent\z@ \parskip\cftparskip
+      \@nameuse{@cftmake#3title}
+      \@starttoc{#3}%
+    \endgroup
+    \@cfttocfinish}
+ \fi
+
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\@cftmakeZtitle}
+% Typeset the title.
+% \changes{v2.3}{2002/06/15}{Added \cs{@secpenalty} to \cs{@cftmakeZtitle}}
+% \changes{v2.3}{2002/06/15}{Added \cs{@cftpagestyle} to \cs{@cftmakeZtitle}}
+%    \begin{macrocode}
+  \@namedef{@cftmake#3title}{%
+    \addpenalty\@secpenalty
+    \if@cfthaschapter
+      \vspace*{\@nameuse{cftbefore#3titleskip}}%
+    \else
+      \vspace{\@nameuse{cftbefore#3titleskip}}%
+    \fi
+    \@cftpagestyle
+    {\interlinepenalty\@M
+    {\@nameuse{cft#3titlefont}#4}{\@nameuse{cftafter#3title}}%
+    \@nameuse{cftmark#3}%
+    \par\nobreak
+    \vskip \@nameuse{cftafter#3titleskip}%
+    \@afterheading}}
+
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\cftbeforeZtitleskip}
+% \begin{macro}{\cftafterZtitleskip}
+% \begin{macro}{\cftZtitlefont}
+% The skips before and after the title heading, and the title font.
+% The default values depend on whether or not the document class
+% has chapters.
+%    \begin{macrocode}
+   \expandafter\newlength\csname cftbefore#3titleskip\endcsname
+   \expandafter\newlength\csname cftafter#3titleskip\endcsname
+   \if@cfthaschapter
+      \setlength{\@nameuse{cftbefore#3titleskip}}{50pt}
+      \setlength{\@nameuse{cftafter#3titleskip}}{40pt}
+      \if@cftkoma
+        \@namedef{cft#3titlefont}{\size@chapter\sectfont}
+      \else
+        \@namedef{cft#3titlefont}{\normalfont\Huge\bfseries}
+      \fi
+    \else
+      \setlength{\@nameuse{cftbefore#3titleskip}}{3.5ex \@plus 1ex \@minus .2ex}
+      \setlength{\@nameuse{cftafter#3titleskip}}{2.3ex \@plus .2ex}
+      \if@cftkoma
+        \@namedef{cft#3titlefont}{\size@section\sectfont}
+      \else
+        \@namedef{cft#3titlefont}{\normalfont\Huge\bfseries}
+      \fi
+    \fi
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+%
+% \begin{macro}{\cftafterZtitle}
+% Something to go after the title.
+%    \begin{macrocode}
+    \@namedef{cftafter#3title}{}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\cftZprehook}
+% \begin{macro}{\cftZposthook}
+% Hooks before and after the list of entries.
+%    \begin{macrocode}
+    \@namedef{cft#3prehook}{}
+    \@namedef{cft#3posthook}{}
+%    \end{macrocode}
+% \end{macro}
+%
+% This is the end of the definition of |\newlistof|.
+%    \begin{macrocode}
+}
+
+
+
+
+
+
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\cftsetindents}
+% \changes{v2.0}{2001/03/15}{Added \cs{cftsetindents}}
+% |\cftsetindents{|\meta{entry}|}{|\meta{indent}|}{|\meta{numwidth}|}| sets
+% the \textit{indent} and \textit{numwidth} for entry \meta{entry}. The macro
+% has to map between the external entry name and the internal shorthand.
+%    \begin{macrocode}
+\newcommand{\cftsetindents}[3]{%
+  \def\@cftemp{#1}
+  \ifx\@cftemp\cftchapname 
+    \@cftsetindents{chap}{#2}{#3}
+  \else
+    \ifx\@cftemp\cftsecname \@cftsetindents{sec}{#2}{#3}
+    \else
+      \ifx\@cftemp\cftsubsecname \@cftsetindents{subsec}{#2}{#3}
+      \else
+        \ifx\@cftemp\cftsubsubsecname \@cftsetindents{subsubsec}{#2}{#3}
+        \else
+          \ifx\@cftemp\cftparaname \@cftsetindents{para}{#2}{#3}
+          \else
+            \ifx\@cftemp\cftsubparaname \@cftsetindents{subpara}{#2}{#3} 
+            \else
+              \ifx\@cftemp\cftfigname \@cftsetindents{fig}{#2}{#3}
+              \else
+                \ifx\@cftemp\cftsubfigname \@cftsetindents{subfig}{#2}{#3} 
+                \else
+                  \ifx\@cftemp\cfttabname \@cftsetindents{tab}{#2}{#3}
+                  \else
+                    \ifx\@cftemp\cftsubtabname \@cftsetindents{subtab}{#2}{#3}
+                    \else
+                      \@cftsetindents{#1}{#2}{#3}
+                    \fi
+                  \fi
+                \fi
+              \fi
+            \fi
+          \fi
+        \fi
+      \fi
+    \fi
+  \fi
+}
+
+%    \end{macrocode}
+% \end{macro}

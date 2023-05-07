@@ -1,0 +1,105 @@
+\documentclass{article}
+\usepackage[margin=2cm]{geometry}
+\usepackage{cellspace, tabularx}      % <---
+\setlength\cellspacetoplimit{4pt}     % <---
+\setlength\cellspacebottomlimit{4pt}  % <---
+
+\renewcommand\tabularxcolumn[1]{m{#1}}
+\newcolumntype{C}{>{\centering\arraybackslash}X}
+\addparagraphcolumntypes{C}          % <---
+\newcommand\mcx[1]{\multicolumn{2}{>{\hsize=\dimexpr2\hsize+2\tabcolsep\centering}X|}{#1}} % <---
+
+\makeatletter
+\def\hlinewd#1{%
+\noalign{\ifnum0=`}\fi\hrule \@height #1 %
+\futurelet\reserved@a\@xhline} 
+\makeatother
+
+\begin{document}
+\begin{center}
+\Large \textbf{Teaching Assistant Classroom Observation Sheet}
+\end{center}
+\begin{tabularx}{\textwidth}{XXX}
+\textbf{Teaching Assistant: }&&\textbf{Course:} \\
+\textbf{Evaluator:} &&\textbf{Date:}
+\end{tabularx}
+
+\section{Preparation}
+\setlength\tabcolsep{4pt}
+\begin{tabularx}{\linewidth}{|>{\hsize=3\hsize}S{C} | c | CC | C | CC |}
+    \hline
+Question    &   Not Observed    &   \mcx{More Emphasis Needed} &   &   \mcx{Fully Accomplished}  \\
+    \hlinewd{1.5pt}
+TA is well-prepared and able to work homework problems  &   & 1 & 2 & 3 & 4 & 5 \\
+    \hline
+Knows material in text and lectures  &   & 1 & 2 & 3 & 4 & 5 \\
+    \hline
+Problem solving techniques are consistent with lecturer and text  &   & 1 & 2 & 3 & 4 & 5 \\
+    \hline
+Promptly returns graded assignments  &   & 1 & 2 & 3 & 4 & 5 \\
+    \hline
+\end{tabularx}
+
+    
+\section{Presentation}
+
+\begin{tabularx}{\linewidth}{|>{\hsize=3\hsize}S{C} | c | CC | C | CC |}
+    \hline
+Question    &   Not Observed    &   \mcx{More Emphasis Needed} &   &   \mcx{Fully Accomplished}  \\
+    \hlinewd{1.5pt}
+Is on time for class&& 1& 2& 3& 4& 5\\ \hline
+Is friendly but professional in manner and appearance&& 1& 2& 3& 4& 5\\ \hline
+Indicates topics of the day&& 1& 2& 3& 4& 5\\ \hline
+Speaks loudly and clearly&& 1& 2& 3& 4& 5\\ \hline
+Communicates effectively so students can follow&& 1& 2& 3& 4& 5\\ \hline
+Goes step-by-step and writes down steps&& 1& 2& 3& 4& 5\\ \hline
+Uses blackboard effectively&& 1& 2& 3& 4& 5\\ \hline
+Presents material at an appropriate level&& 1& 2& 3& 4& 5\\ \hline
+Emphasizes methods of solving problems rather than solutions&& 1& 2& 3& 4& 5\\ \hline
+Emphasizes key points and concepts&& 1& 2& 3& 4& 5\\ \hline
+Uses class time effectively&& 1& 2& 3& 4& 5\\ \hline
+\end{tabularx}
+
+\section{Teacher-Student Interaction}
+
+\begin{tabularx}{\linewidth}{|>{\hsize=3\hsize}S{C} | c | CC | C | CC |}
+    \hline
+Question    &   Not Observed    &   \mcx{More Emphasis Needed} &   &   \mcx{Fully Accomplished}  \\
+    \hlinewd{1.5pt}
+Actively encourages student questions&& 1& 2& 3& 4& 5\\ \hline
+Listens to and understands student questions&& 1& 2& 3& 4& 5\\ \hline
+Responds appropriately to student questions&& 1& 2& 3& 4& 5\\ \hline
+Makes sure the class hears and understands questions&& 1& 2& 3& 4& 5\\ \hline
+Gives reasons for rejecting an answer&& 1& 2& 3& 4& 5\\ \hline
+Corrects misconceptions, sees that the correct answer is brought out&& 1& 2& 3& 4& 5\\ \hline
+Admits if doesn't know the answer or is wrong&& 1& 2& 3& 4& 5\\ \hline
+Asks questions to monitor students' understanding&& 1& 2& 3& 4& 5\\ \hline
+Where appropriate, encourages alternate ways to solve problems&& 1& 2& 3& 4& 5\\ \hline 
+Does not embarrass or belittle students&& 1& 2& 3& 4& 5\\ \hline
+\end{tabularx}
+
+\section{Classroom Atmosphere}
+
+
+\begin{tabularx}{\linewidth}{|>{\hsize=3\hsize}S{C} | c | CC | C | CC |}
+    \hline
+Question    &   Not Observed    &   \mcx{More Emphasis Needed} &   &   \mcx{Fully Accomplished}  \\
+    \hlinewd{1.5pt}
+Establishes positive rapport and mutual respect with the students&& 1& 2& 3& 4& 5\\ \hline
+Class atmosphere is conducive to learning&& 1& 2& 3& 4& 5\\ \hline
+Maintains eye contact&& 1& 2& 3& 4& 5\\ \hline
+Keeps students' attention, including those who are not interacting&& 1& 2& 3& 4& 5\\ \hline 
+Provides opportunities for and encourages audience participation and questions&& 1& 2& 3& 4& 5\\ \hline
+Indicates availability for giving individual help&& 1& 2& 3& 4& 5\\ \hline
+\vspace{0.25cm} Attendance \vspace{0.25cm}&& \multicolumn{2}{c |}{$<\frac{1}{3}$ full} & $\frac{1}{3}$ - $\frac{2}{3}$ full& \multicolumn{2}{c |}{$ > \frac{2}{3}$ full}\\ \hline
+\end{tabularx}
+
+
+\section{Evaluator's Comments}
+
+What were the major strengths of the teaching assistant noted in this classroom observation?\\
+\vfill
+What suggestions do you have for improving his  or her teaching skills?\\
+\vfill
+
+\end{document}

@@ -1,0 +1,172 @@
+\documentclass{medWithdrawal}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%% Configuration Commands: Fill these out as indicated.  %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+%%%%%   Instructor Configuration: You probably only need to set these once.
+\setinstructorName{% Put your name on the next line as shown.
+Jason Nowell
+}%
+
+\setinstructorSignature{% If you have a digital signature file you can use it here. Otherwise you might just type your name.
+\raisebox{-\baselineskip}{\includegraphics[width=150pt,height=2\baselineskip]{JN-Signature.JPG}}
+}
+\setinstructorEMail{% Your email goes on the next line.
+JNowell@ufl.edu
+}
+\setinstructorPhone{% Your contact phone number goes on the next line.
+1-800-555-1212
+}
+
+
+
+%%%%%   Course Information: This is all the Course info for the course the student took.
+
+\setcourseNumber{% Course number for the class goes on the next line.
+MAC1140
+}
+
+\setsectionNumber{% Course section number goes on the next line.
+11570
+}
+\setcreditNumber{% Number of credits the course counts for goes on the next line.
+3
+}
+\settermYear{% Course Semester and Year goes on the next line.
+Fall 2019
+}
+
+
+
+%%%%%   Student Information: This is all the contact info for the student, but not grade-related stuff.
+
+\setufID{% Put the students UFID on the next line.
+1234-5678
+}
+\setStudentLastName{% Student's last name goes on the next line.
+Doe
+}
+\setstudentFirstName{% Student's first name goes on the next line.
+John-Jacob
+}
+\setstudentClassCollege{% Student's class year and college goes on the next line.
+2023, CALS
+}
+\setstudentSubmissionDate{% The date the student submitted the form to you goes on the next line.
+2/18/2020
+}
+\setstudentEMail{% Student's email goes on the next line.
+StudentsEMAIL@ufl.edu
+}
+\setstudentPhone{% Student's contact phone number goes on the next line.
+867-5309
+}
+
+
+%%%%%   Student Interaction Information: This is info about how the student interacted with you during the term
+\setstudentAttendencePattern{% Describe the student's attendence pattern; eg ``erratic'', ``reliable'', ``never seen''
+Erratic.
+}
+\setstudentLastDateAttended{% When was the last day the student attended class?
+Online Only.
+}
+\setstudentIssueDuringTerm{% Did the student talk to you about the issue that is prompting this petition?
+No.
+}
+\setinstructorAdditionalComments{% Do you have any additional comments about this student or this petition?
+I have no additional comments.
+}
+
+
+
+
+%%% Add grade commands
+
+\setfinalLetterGrade{E}
+\addFinalExam{December 7th}{0/100}
+%\setfinalExamGrade{0/100}
+
+
+
+\begin{document}
+
+%%%%%   Grade Information.
+%           To add an exam use \addExamGrade{DATE-Taken}{Grade-Earned}. You can add an optional argument to replace the name of the exam.
+%           To add a quiz use  \addQuizGrade{DATE-Taken}{Grade-Earned}. You can add an optional argument to replace the name of the quiz.
+%           To add homework use \addHWGrade{DATE-Due}{Grade-Earned}. You can add an optional argument to replace the name of the HW assignment.
+%           To add some other assignment use \addOtherGrade{Assignment-Name}{DATE-Due}{Grade-Earned}.
+%               Most of the entries for any of the above commands are fairly robust; allowing for math-mode, regular text, or images.
+%               See after the \end{document} command for examples of using each of these listed commands.
+
+
+
+
+% Exams:
+\addExamGrade{September 19th}{0/50}
+\addExamGrade{Oct 11th}{19.75/50}
+\addExamGrade{11-1}{22/50}
+\addExamGrade{November 25th}{$\frac{32.5}{50}$}
+
+
+%Quizzes:
+\addQuizGrade{September 18th}{10/10}
+\addQuizGrade{September 18th}{3.75/10}
+\addQuizGrade{September 18th}{5/10}
+\addQuizGrade{October 10th}{2/10}
+\addQuizGrade{October 10th}{7/10}
+\addQuizGrade{October 10th}{1/10}
+\addQuizGrade{October 10th}{5/10}
+\addQuizGrade{October 31st}{10/10}
+\addQuizGrade{October 31st}{10/10}
+\addQuizGrade{November 24th}{9/10}
+\addQuizGrade{November 24th}{1.12/10}
+\addQuizGrade{November 24th}{11/10}
+\addQuizGrade{December 6th}{10/10}
+
+% Homework
+\addHWGrade[Xronos Homework]{December 9th}{15.46/50}
+
+
+%% Other Grades:
+\addOtherGrade{Model Project}{Oct 1st}{45/50}
+
+
+
+\end{document}
+
+%%%%%%% Examples:
+
+% Exams:
+\addExamGrade{September 19th}{0/50}
+\addExamGrade{Oct 11th}{19.75/50}
+\addExamGrade{11-1}{22/50}
+\addExamGrade{November 25th}{$\frac{32.5}{50}$}
+
+
+%Quizzes:
+\addQuizGrade{September 18th}{10/10}
+\addQuizGrade{September 18th}{3.75/10}
+\addQuizGrade{September 18th}{5/10}
+\addQuizGrade{October 10th}{2/10}
+\addQuizGrade{October 10th}{7/10}
+\addQuizGrade{October 10th}{1/10}
+\addQuizGrade{October 10th}{5/10}
+\addQuizGrade{October 31st}{10/10}
+\addQuizGrade{October 31st}{10/10}
+\addQuizGrade{November 24th}{9/10}
+\addQuizGrade{November 24th}{1.12/10}
+\addQuizGrade{November 24th}{11/10}
+\addQuizGrade{December 6th}{10/10}
+
+% Homework
+\addHWGrade[Xronos Homework]{December 9th}{15.46/50}
+
+
+%% Other Grades:
+\addOtherGrade{Model Project}{Oct 1st}{45/50}
+
+

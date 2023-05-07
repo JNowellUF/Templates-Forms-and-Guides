@@ -1,0 +1,8 @@
+\contentsline {part}{I\hspace {1em}In-Depth Tutorial: \\ Step by Step process from Start to Finish}{2}{part.1}% 
+\contentsline {section}{\numberline {1}Logging Into YouTube}{2}{section.1}% 
+\contentsline {section}{\numberline {2}Uploading Video}{2}{section.2}% 
+\contentsline {section}{\numberline {3}Configuring The Video On Upload}{4}{section.3}% 
+\contentsline {section}{\numberline {4}How To Crop Video}{8}{section.4}% 
+\contentsline {part}{II\hspace {1em}Quick Guide: \\ For Those Familiar with Most or All of the Process}{13}{part.2}% 
+\contentsline {section}{\numberline {5}Settings}{13}{section.5}% 
+\contentsline {section}{\numberline {6}Editing}{14}{section.6}% 

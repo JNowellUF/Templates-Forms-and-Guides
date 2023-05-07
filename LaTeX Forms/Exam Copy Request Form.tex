@@ -1,0 +1,107 @@
+\documentclass{article}
+\usepackage{fancyhdr}
+\usepackage[margin=1in]{geometry}
+\usepackage{tabularx}
+\usepackage{amssymb}
+\makeatletter
+\pagestyle{fancy}
+\chead{Exam Copy Instruction Sheet}
+
+%%% The magic, don't change this stuff:
+\newcommand{\addRoom}[5]{%
+                        % Syntax: \addRoom{Room#}{Instructor and Section}{# of Exams}{# of Scantrons}{# Of Scratch Paper}
+#1 & #2 & #3 & #4 & #5 & \\[1.5\baselineskip]\hline
+}
+
+%% Code to support an instructor name, or a blank if not given:
+\newcommand{\Instructor}[1]{\newcommand{\InstructorName}{#1}}% a command to set another command's value to be the instructors name, so we can check if it's defined.
+\newcommand{\DisplayInstructor}{% Checks to see if \InstructorName is defined. If so, use that, if not, leave a blank.
+    \InstructorName}
+%%%%% Don't change the above stuff.
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%% Config commands: Fill out this stuff with your info. Usually you only need to fill most of this stuff out once per semester, with the exception of the exam number and date.
+% I have left actual info in here from a fall exam from 2019 to show what kind of info goes where. Replace with your info.
+
+%%% If you want a specific color for a specific MC or FRQ section of a specific form code letter, record that below. By default I have ``any'' for all of them.
+% Note that, there is also an option to have ``different colors for different forms'' after the \begin{document} command below. So you can leave this as ``any'' and specify that you still want different colors for different form codes below.
+\newcommand{\ColorMCFormA}{Any}
+\newcommand{\ColorFRQFormA}{Any}
+\newcommand{\ColorMCFormB}{Any}
+\newcommand{\ColorFRQFormB}{Any}
+\newcommand{\ColorMCFormC}{Any}
+\newcommand{\ColorFRQFormC}{Any}
+\newcommand{\ColorMCFormD}{Any}
+\newcommand{\ColorFRQFormD}{Any}
+\newcommand{\ColorMCFormE}{Any}
+\newcommand{\ColorFRQFormE}{Any}
+\newcommand{\ColorMCFormF}{Any}
+\newcommand{\ColorFRQFormF}{Any}% I'll assume no more than 6 forms since they really should only have up to 6...
+\newcommand{\DRCCount}{}
+\makeatother
+
+
+
+\newcommand{\Course}{MAC1140}
+\newcommand{\ExamNumber}{4}
+\newcommand{\Versions}{2}
+\newcommand{\ExamDate}{12-7-2019}
+\newcommand{\ExamTime}{7:30 am}
+\newcommand{\ExamTerm}{Fall}
+\newcommand{\ExamTotalCount}{325}
+\newcommand{\DoubleSided}{Yes}
+\Instructor{Jason Nowell}
+
+
+
+
+
+\begin{document}
+
+%%%% Don't change this stuff.
+\begin{tabularx}{\textwidth}{XXXXX}
+Name: \DisplayInstructor &Course: \Course & Exam Date: \ExamDate & Time: \ExamTime\\
+Term: \ExamTerm & Total Exams: \ExamTotalCount & Versions: \Versions & Double Sided: \DoubleSided \\ \\
+\end{tabularx}
+%%%% Don't change the above.
+
+\textbf{Different Colors for Different Versions?}
+%% If you do/don't want different colors for different forms write yes or no in the next line accordingly.
+ Yes \\
+
+%%% If you have more form codes, comment in or out whichever ones you have below. For me, I use forms A and B, so those are uncommented, but if you use A, B, C, and D you will want to uncomment each of those.
+\begin{tabularx}{\textwidth}{|XXX|}\hline
+\textbf{Form Label} & \textbf{MC-Color} & \textbf{FRQ-Color}\\\hline
+A & \ColorMCFormA & \ColorFRQFormA \\
+B & \ColorMCFormB & \ColorFRQFormB \\
+%C & \ColorMCFormC & \ColorFRQFormC \\
+%D & \ColorMCFormD & \ColorFRQFormD \\
+%E & \ColorMCFormE & \ColorFRQFormE \\
+\hline
+\end{tabularx}
+
+\renewcommand{\arraystretch}{2}
+
+
+%% This is mostly automated except where you want to include the \addRoom commands below.
+\begin{tabularx}{\textwidth}{|l|X|l|l|l|c|}\hline
+Room Number & Instructor (Sectuon \# etc)& \#Exams & \#Scantrons& \#Scratch& \hspace*{0.5cm}\checkmark\hspace*{0.5cm}\\\hline
+% Don't change above this line.
+%%%%% use the \addRoom command below this line, everything else should automate to fill out stuff correctly.
+% Change below this line.
+% Syntax: \addRoom{(ROOM NUMBER)}{TA AND SECTION NUMBERS}{NUMBER OF EXAMS}{NUMBER OF SCANTRONS}{NUMBER SCRAP PAPER}
+% Example: the command 
+%   \addRoom{CSE A101}{Bell (3343, 3345, 3354)}{110}{110}{250}
+%   Says: TA Bell has sections 3343, 3345, 3354. He is proctoring in room CSE A101. He needs 110 scantrons and 110 exams, and 250 pages of scratch paper.
+% Next 3 commands are 3 actual copy request I made in fall 2019, left as reference. Replace them with your own code.
+\addRoom{MCCC100}{\hbox{Anderson (3057, 3059, 3061),} \hbox{Bandara (3057, 3059, 3061)}}{135}{135}{270}
+\addRoom{CSE A101}{\hbox{Bell (3343, 3345, 3354),}\hbox{Patel (3343, 3345, 3354),}}{110}{110}{250}
+\addRoom{PUGH 170}{\hbox{Park (3064, 3346, 7813,)}Hayden Hunter (extra)}{80}{80}{180}
+
+\end{tabularx}
+
+\end{document}
